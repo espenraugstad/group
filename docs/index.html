@@ -1,63 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Find Group Number</title>
     <style>
-        body{
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        main{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 80vw;
-            margin: 3rem auto;
-        }
-        input, div, button{
-            margin: 1rem 0;
-        }
-        button{
-            width: 5rem;
-            padding: .25rem;
-            font-weight: 600;
-        }
+      body {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80vw;
+        margin: 3rem auto;
+      }
+      input,
+      div,
+      button {
+        margin: 1rem 0;
+      }
+      button {
+        width: 5rem;
+        padding: 0.25rem;
+        font-weight: 600;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <h1>Enter IS-104 group number</h1>
-        <input id="inp1" type="number" />
-        <div>
-            <button id="btn1">Submit</button>
-            <button id="btn2">Clear</button>
-        </div>
-        
-        <div id="res">Your group is...</div>
+      <h1>Enter your group number, including letter</h1>
+      <input id="inp1" type="text" />
+      <div>
+        <button id="btn1">Submit</button>
+        <button id="btn2">Clear</button>
+      </div>
+
+      <div id="res">Your IS-104 group is...</div>
     </main>
     <script>
-        const btn1 = document.getElementById('btn1');
-        const btn2 = document.getElementById('btn2');
-        const inp1 = document.getElementById('inp1');
-        const res = document.getElementById('res');
-        btn1.addEventListener("click", ()=>{
-            let val = inp1.value;
-            if(val === ""){
-                res.innerText = "Invalid input, enter a number.";
-            } else {
-                val = parseInt(val);
-                let letter = "";
-                let num = Math.round(val/2);
-                val%2 === 0 ? letter = "B" : letter = "A";
-                res.innerText = `Your group number is ${num}${letter.toUpperCase()}.`;
-            }
-        });
-        btn2.addEventListener("click", ()=>{
-            inp1.value = "";
-            res.innerText = "Your group is...";
-        });
+      const btn1 = document.getElementById("btn1");
+      const btn2 = document.getElementById("btn2");
+      const inp1 = document.getElementById("inp1");
+      const res = document.getElementById("res");
+      btn1.addEventListener("click", () => {
+        let val = inp1.value;
+        if (val === "") {
+          res.innerText = "Invalid input.";
+        } else {
+          
+          let letter = val[val.length - 1].toUpperCase();
+          let num = parseInt(val.slice(0,-1));
+          
+          if (letter !== "A" && letter !== "B") {
+            res.innerText = "Invalid input.";
+          } else {
+            let group = 0;
+            letter === "B" ? (group = num * 2) : (group = num * 2 - 1);
+            res.innerText = `Your IS-104 group number is ${group}.`;
+          }
+        }
+      });
+      btn2.addEventListener("click", () => {
+        inp1.value = "";
+        res.innerText = "Your group is...";
+      });
     </script>
-</body>
+  </body>
 </html>

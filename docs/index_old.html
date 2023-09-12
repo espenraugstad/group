@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Group Number</title>
+    <style>
+        body{
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80vw;
+            margin: 3rem auto;
+        }
+        input, div, button{
+            margin: 1rem 0;
+        }
+        button{
+            width: 5rem;
+            padding: .25rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Enter IS-104 group number</h1>
+        <input id="inp1" type="number" />
+        <div>
+            <button id="btn1">Submit</button>
+            <button id="btn2">Clear</button>
+        </div>
+        
+        <div id="res">Your group is...</div>
+    </main>
+    <script>
+        const btn1 = document.getElementById('btn1');
+        const btn2 = document.getElementById('btn2');
+        const inp1 = document.getElementById('inp1');
+        const res = document.getElementById('res');
+        btn1.addEventListener("click", ()=>{
+            let val = inp1.value;
+            if(val === ""){
+                res.innerText = "Invalid input, enter a number.";
+            } else {
+                val = parseInt(val);
+                let letter = "";
+                let num = Math.round(val/2);
+                val%2 === 0 ? letter = "B" : letter = "A";
+                res.innerText = `Your group number is ${num}${letter.toUpperCase()}.`;
+            }
+        });
+        btn2.addEventListener("click", ()=>{
+            inp1.value = "";
+            res.innerText = "Your group is...";
+        });
+    </script>
+</body>
+</html>
